@@ -1,0 +1,107 @@
+Name:            yahac
+Version:         0.0.0.1
+License:         BSD3
+Author:          Orion Jankowski
+Maintainer:      orion10@gmail.com 
+Category:        Games
+Build-type:      Simple
+Cabal-version:   >=1.8
+Synopsis:        
+Description:
+ Yet Another Haskell Asteroids Clone
+
+Data-files:
+Extra-source-files:
+  README
+
+Library
+  ghc-options: -threaded -fno-warn-missing-signatures -fwarn-tabs -O2
+  hs-source-dirs: src
+  Build-depends:
+    base == 4.*,
+    gtk >= 0.12.3,
+    --wai >= 1.2.0,
+    --warp >= 1.2.0,
+    transformers >= 0.3.0,
+    cairo >= 0.12.3,
+    time >= 1.4,
+    uuid >= 1.2.6,
+    containers >= 0.4.2.1,
+    random == 1.*,
+    mtl >= 2.1.0
+
+  Exposed-Modules:
+    Yahac.Asteroids.Game
+    Yahac.Asteroids.Game.Control
+    Yahac.Asteroids.Object.Basic
+    Yahac.Asteroids.Object.Player
+    Yahac.Asteroids.Object.Bullet
+    Yahac.Asteroids.Object.Planet
+    Yahac.Asteroids.Object.Shard
+    Yahac.Asteroids.Object.Burst
+    Yahac.Asteroids.Object.Path
+    Yahac.Asteroids.Object.Render.Cairo
+    Yahac.Asteroids.Internal.BoundingBox
+    Yahac.Asteroids.Internal.Color
+    Yahac.Asteroids.Internal.Point
+    Yahac.Asteroids.Internal.Engine
+
+
+
+
+
+
+Executable yahac
+  Main-is: StandaloneYahac.hs
+  hs-source-dirs: src
+
+  Other-modules:
+    Yahac.Asteroids.Game
+    Yahac.Asteroids.Game.Control
+    Yahac.Asteroids.Object.Basic
+    Yahac.Asteroids.Object.Player
+    Yahac.Asteroids.Object.Bullet
+    Yahac.Asteroids.Object.Planet
+    Yahac.Asteroids.Object.Shard
+    Yahac.Asteroids.Object.Burst
+    Yahac.Asteroids.Object.Burst
+    Yahac.Asteroids.Object.Path
+    Yahac.Asteroids.Object.Render.Cairo
+    Yahac.Asteroids.Internal.BoundingBox
+    Yahac.Asteroids.Internal.Color
+    Yahac.Asteroids.Internal.Point
+    Yahac.Asteroids.Internal.Engine
+
+
+  Build-depends:
+    base == 4.*,
+    gtk >= 0.12.3,
+    --wai >= 1.0.0,
+    --warp >= 1.0.0,
+    transformers >= 0.2.2,
+    cairo >= 0.12.3,
+    time >= 1.4,
+    uuid >= 1.2.6,
+    containers >= 0.4.2.1,
+    random == 1.*,
+    mtl >= 2.1.0
+
+  ghc-options: -threaded -fno-warn-missing-signatures -fwarn-tabs -rtsopts -O2
+
+Executable test
+  Main-is: Test.hs
+  hs-source-dirs: src
+
+  Build-depends:
+    base == 4.*,
+    containers >= 0.4.2.1,
+    gtk >= 0.12.3,
+    cairo >= 0.12.3,
+    time >= 1.4,
+    uuid >= 1.2.6,
+    random == 1.*,
+    mtl >= 2.1.0
+
+  ghc-options: -threaded -fno-warn-missing-signatures -fwarn-tabs -O2
+
+
