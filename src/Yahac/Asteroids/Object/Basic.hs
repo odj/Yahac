@@ -5,6 +5,7 @@
 module Yahac.Asteroids.Object.Basic (
     Basic(..),
     Game(..),
+    ObjectType(..),
     ObjectUpdateIO,
     defaultBasicObject,
     newBasicObject,
@@ -24,6 +25,7 @@ module Yahac.Asteroids.Object.Basic (
 where
 
 import Yahac.Asteroids.Internal.Point
+import Yahac.Asteroids.Game.ControlState
 import Yahac.Asteroids.Internal.Color
 import Yahac.Asteroids.Internal.BoundingBox
 
@@ -35,6 +37,7 @@ import Data.Maybe
 import Unsafe.Coerce
 import Control.Monad
 import Control.Applicative (pure)
+import Control.Concurrent.MVar
 import qualified Data.Map as M
 import Graphics.Rendering.Cairo.Matrix
 
@@ -53,6 +56,14 @@ type ObjectUpdateIO =
  -> Basic      -- ^ The top-level game object 
  -> IO(Basic)  -- ^ Returns a new top level game object
 
+
+data ObjectType = 
+    Player (MVar ControlState)
+  | Bullet UUID
+  | NonRenderd
+  | Rendered
+
+
 -- | Holds all information for rendering and behavior of a object.  The top-level game object
 --   is of this type.
 data Basic = Basic 
@@ -67,6 +78,7 @@ data Basic = Basic
     , isSegment         :: !Bool                             -- ^ The point list is a segmen, i.e. open path
     , children          :: !(M.Map UUID Basic)               -- ^ A map of all child objects.
     , uuid              :: {-# UNPACK #-} !UUID              -- ^ The current object's UUID.
+    , objectType        :: ObjectType                        -- ^ The type of the object
     , label             :: !(Maybe String)                   -- ^ The current object's label.  
                                                              --   Possibly used to filter on arbitrary strings. 
                                                              --   Not just for 'Show'.
@@ -88,7 +100,7 @@ data Basic = Basic
     , updateGameFun     :: ObjectUpdateIO                    -- ^ IO action to take when updating the game (this is where objects are added and removed).
     , age               :: Int                               -- ^ The total age of the object in ms
     , maxLifetime       :: !(Maybe Int)                      -- ^ The maximum lifetime of the object before it is deleted from the top-level map.
-    } 
+    }  
 
 
 -- | A default object with sane update functions
@@ -104,6 +116,7 @@ defaultBasicObject = Basic
     , lineWidth = 0.001
     , children = M.empty
     , uuid = UUID.nil
+    , objectType = NonRenderd
     , label = Nothing
     , mass = 0.0
     , angularMoment = 0.0

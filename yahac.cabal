@@ -33,6 +33,7 @@ Library
   Exposed-Modules:
     Yahac.Asteroids.Game
     Yahac.Asteroids.Game.Control
+    Yahac.Asteroids.Game.ControlState
     Yahac.Asteroids.Object.Basic
     Yahac.Asteroids.Object.Player
     Yahac.Asteroids.Object.Bullet
@@ -58,6 +59,7 @@ Executable yahac
   Other-modules:
     Yahac.Asteroids.Game
     Yahac.Asteroids.Game.Control
+    Yahac.Asteroids.Game.ControlState
     Yahac.Asteroids.Object.Basic
     Yahac.Asteroids.Object.Player
     Yahac.Asteroids.Object.Bullet

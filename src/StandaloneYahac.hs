@@ -80,7 +80,7 @@ main = do
         let green = Color 0.0 1.0 0.0 Nothing
         (game, state) <- getGameState
         let state' = defaultControlState { controlUuid = uuid player }
-        let game' = addChild player $ addChild (path {lineColorFun = (\_ -> green) }) game
+        let game' = addChild player {objectType = Player mvState} $ addChild (path {lineColorFun = (\_ -> green) }) game
         putGameState (game', state')
 
 

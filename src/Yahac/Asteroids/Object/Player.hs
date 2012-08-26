@@ -9,6 +9,8 @@ import Yahac.Asteroids.Object.Burst
 import Yahac.Asteroids.Object.Basic
 import Yahac.Asteroids.Object.Shard
 
+
+
 white = Color 1.0 1.0 1.0 Nothing
 
 newPlayer = do
@@ -28,6 +30,7 @@ newPlayer = do
         , fillColor = Just white
         , canCollideFun = (\_ -> True)
         , onCollideFun = onCollide'
+        , objectType = Player undefined
         }
 
 

@@ -57,6 +57,7 @@ newBullet player = do
         , maxLifetime = Just defaultMaxLifetime
         , canCollideFun = (\_ -> True)
         , onCollideFun = onCollide'
+        , objectType = Bullet $ uuid player
         }
 
 

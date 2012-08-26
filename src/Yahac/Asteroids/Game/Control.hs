@@ -11,6 +11,7 @@ module Yahac.Asteroids.Game.Control (
     )
 where
 
+import Yahac.Asteroids.Game.ControlState
 import Yahac.Asteroids.Object.Basic
 import Yahac.Asteroids.Object.Bullet
 import Yahac.Asteroids.Object.Burst
@@ -40,22 +41,8 @@ data ControlFunction = ControlFunction
     } 
 
 
--- | Describes the Control State of a player
-data ControlState = ControlState
-    { turn          :: Direction  -- ^ The turning direction
-    , thrust        :: Thrust     -- ^ The thrust state
-    , thrustLevel   :: Double     -- ^ The thrust level for this player
-    , rotationLevel :: Double     -- ^ The rotation level for this player 
-    , fire          :: Bool       -- ^ Is firing
-    , lastFire      :: Int        -- ^ The amount of time (ms) since last fired.  Used to control fire rate.
-    , controlUuid   :: UUID       -- ^ The UUID of the player this control belongs to.
-    } deriving Show
 
 
-
-data Direction = TurnLeft | TurnRight | Center deriving (Show, Eq, Ord)
-
-data Thrust = Forward | Backwards | NoThrust deriving (Show, Eq, Ord)
 
 
 -- | Creates a new default control state for player
@@ -134,6 +121,8 @@ defaultControlState = ControlState
     , rotationLevel = 0.05
     , fire = False
     , lastFire = 0
+    , totalFired = 0
+    , score = 0
     , controlUuid = nil
     }
 

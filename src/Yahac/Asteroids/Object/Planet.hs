@@ -39,9 +39,6 @@ onCollide' targets = f where
             otherwise -> if validHit targets && canCollide self
                          then collide 
                          else return game
- 
-
-
 
 newDefaultPlanet = do
     let circlePoints = map (\v -> (cos v, sin v)) [0.0, (2 * pi / 16) .. 2*pi]
@@ -65,7 +62,7 @@ halfSize p ang = do
     return $ p 
         { uuid = uuid
         , scaleValue = (scaleValue p) </> 2.0
-        , velocity = (velocity p) <+> (unitVector ang <*> 0.3)
+        , velocity = (velocity p) <+> (unitVector ang <*> 0.1)
         , mass = (mass p) / 2.0
         , age = 0
         }
